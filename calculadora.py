@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import messagebox
 
 
@@ -29,6 +30,20 @@ janela = tk.Tk()
 janela.title("Calculadora WFR")
 janela.geometry("360x500")
 janela.resizable(width=False, height=False)
+janela.configure(bg="#810d0d")  # Cor de fundo da janela
+style = ttk.Style()
+style.theme_use("clam")  # Usa o tema "clam" para personalizar os botões
+style.configure(
+    "Botaoredondo.TButton",
+    background="#3498db",  # Cor de fundo do botão
+    foreground="white",
+    borderwidth=1,
+    focusthickness=3,
+    focuscolor="none")
+style.map("Botaoredondo.TButton",
+          background=[("active", "#2980b9")],  # Cor de fundo quando o botão é pressionado
+          foreground=[("active", "white")])  # Cor do texto quando o botão é pressionado
+
 # Display (Unico campo de texto onde os números e resultados são exibidos)
 display = tk.Entry(janela, font=("Arial", 20), justify="right", bd=10, relief="sunken")
 display.grid(row=0, column=0, columnspan=4, padx=10, pady=20, ipadx=8, ipady=20)
@@ -61,22 +76,22 @@ row = 1  # Começa na linha 1(pois a linha 0 é ocupada pelo display)
 col = 0  # Começa na coluna 0
 for botao in botoes:
     if botao == "=":
-        btn = tk.Button(janela, text=botao, font=("Arial", 14, "bold"), bg=cor_operadores, fg="white", height=2,
-                        command=calcular)
+        btn = ttk.Button(janela, text="Botao Clam", style="Botaoredondo.TButton")
+        btn.config(command=calcular)
         btn.grid(row=row, column=col, columnspan=1, padx=3, pady=3, sticky="nsew")
         col += 1
     elif botao == "0":
-        btn = tk.Button(janela, text=botao, font=("Arial", 14, "bold"), bg=cor_numeros, fg="black", height=2,
-                        command=lambda v=botao: adicionar(v))
+        btn = ttk.Button(janela, text="Botao Clam", style="Botaoredondo.TButton")
+        btn.config(command=lambda v=botao: adicionar(v))
         btn.grid(row=row, column=col, columnspan=1, padx=3, pady=3, sticky="nsew")
         col += 1
     elif botao in ['+', '-', '×', '÷']:
-        btn = tk.Button(janela, text=botao, font=("Arial", 14, "bold"), bg=cor_operadores, fg="white", height=2,
-                        command=lambda v=botao: adicionar(v))
+        btn = ttk.Button(janela, text="Botao Clam", style="Botaoredondo.TButton")
+        btn.config(command=lambda v=botao: adicionar(v))
         btn.grid(row=row, column=col, padx=3, pady=3, sticky="nsew")
         col += 1
     elif botao in ['C', '±', '%', '⌫']:
-        btn = tk.Button(janela, text=botao, font=("Arial", 14, "bold"), bg=cores[botao], fg="white", height=2)
+        btn = ttk.Button(janela, text="Botao Clam", font=("Arial", 14, "bold"), style="Botaoredondo.TButton")
         if botao == 'C':
             btn.config(command=limpar)
         elif botao == '⌫':
@@ -86,13 +101,13 @@ for botao in botoes:
         btn.grid(row=row, column=col, padx=3, pady=3, sticky="nsew")
         col += 1
     elif botao in ['7', '8', '9', '4', '5', '6', '1', '2', '3']:
-        btn = tk.Button(janela, text=botao, font=("Arial", 14,), bg=cor_especial, fg="white", height=2,
-                        command=lambda v=botao: adicionar(v))
+        btn = ttk.Button(janela, text="Botao Clam", font=("Arial", 14,), style="Botaoredondo.TButton")
+        btn.config(command=lambda v=botao: adicionar(v))
         btn.grid(row=row, column=col, padx=3, pady=3, sticky="nsew")
         col += 1
     else:
-        btn = tk.Button(janela, text=botao, font=("Arial", 14, "bold"), bg=cor_numeros, fg="black", height=2,
-                        command=lambda v=botao: adicionar(v))
+        btn = ttk.Button(janela, text="Botao Clam", font=("Arial", 14, "bold"), style="Botaoredondo.TButton")
+        btn.config(command=lambda v=botao: adicionar(v))
         btn.grid(row=row, column=col, padx=3, pady=3, sticky="nsew")
         col += 1
     if col > 3:
